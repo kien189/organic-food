@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-
+@section('title',' Shop')
 @section('content')
     <!-- ===============>>Flash Product section start here <<================= -->
     <section class="product padding-top padding-bottom ">

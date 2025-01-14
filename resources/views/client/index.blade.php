@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title',' Organic Food eCommerce HTML Template')
 @section('content')
 <section class="banner banner--style1">
     <div class="container">

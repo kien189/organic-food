@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-
+@section('title','Forgot Password')
 @section('content')
     <!-- ===============>> account start here <<================= -->
     <section class="account padding-top padding-bottom">

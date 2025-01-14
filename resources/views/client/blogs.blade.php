@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title','Blogs')
 @section('content')
   <!-- ================> Page header start here <================== -->
   <section class="page-header bg--cover" style="background-image:url({{asset('client/assets')}}/images/header/1.png)">

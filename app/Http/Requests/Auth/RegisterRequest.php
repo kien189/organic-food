@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
             'phone.numeric'=>'Số điện thoại phải là số.',
             'phone.max'=>'Số điện thoại không được quá 10 số.',
             'email.required'=>'Email không được để trống.',
+            'email.email'=>'Email không hợp lệ.',
             'password.required'=>'Mật khẩu không được để trống.',
             'password.regex'=>'Mật khẩu phải có 1 chữ in hoa , 1 ký tự đặc biệt .',
             'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
