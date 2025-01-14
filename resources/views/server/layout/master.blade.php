@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from themes.pixelstrap.com/fastkart/back-end/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 13 Jan 2025 04:01:36 GMT -->
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ asset('server/assets') }}/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('server/assets') }}/images/favicon.png" type="image/x-icon">
-    <title>Fastkart - Dashboard</title>
+    <title>Fastkart - @yield('title')</title>
 
     <!-- Google font-->
     <link
@@ -71,8 +72,10 @@
                 <div class="header-logo-wrapper p-0">
                     <div class="logo-wrapper">
                         <a href="index.html">
-                            <img class="img-fluid main-logo" src="{{ asset('server/assets') }}/images/logo/1.png" alt="logo">
-                            <img class="img-fluid white-logo" src="{{ asset('server/assets') }}/images/logo/1-white.png" alt="logo">
+                            <img class="img-fluid main-logo" src="{{ asset('server/assets') }}/images/logo/1.png"
+                                alt="logo">
+                            <img class="img-fluid white-logo"
+                                src="{{ asset('server/assets') }}/images/logo/1-white.png" alt="logo">
                         </a>
                     </div>
                     <div class="toggle-sidebar">
@@ -150,11 +153,13 @@
                                 <i class="ri-moon-line"></i>
                             </div>
                         </li>
+                        @if (Auth::check() && Auth::user()->hasRole('admin'))
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
                             <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="{{ asset('server/assets') }}/images/users/4.jpg" alt="">
+                                <img class="user-profile rounded-circle"
+                                    src="{{ asset('server/assets') }}/images/users/4.jpg" alt="">
                                 <div class="user-name-hide media-body">
-                                    <span>Emay Walter</span>
+                                    <span>{{ Auth::user()->name }}</span>
                                     <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i></p>
                                 </div>
                             </div>
@@ -192,6 +197,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -206,7 +212,8 @@
                 <div>
                     <div class="logo-wrapper logo-wrapper-center">
                         <a href="index.html" data-bs-original-title="" title="">
-                            <img class="img-fluid for-white" src="{{ asset('server/assets') }}/images/logo/full-white.png" alt="logo">
+                            <img class="img-fluid for-white"
+                                src="{{ asset('server/assets') }}/images/logo/full-white.png" alt="logo">
                         </a>
                         <div class="back-btn">
                             <i class="fa fa-angle-left"></i>
@@ -217,9 +224,10 @@
                     </div>
                     <div class="logo-icon-wrapper">
                         <a href="index.html">
-                            <img class="img-fluid main-logo main-white" src="{{ asset('server/assets') }}/images/logo/logo.png" alt="logo">
-                            <img class="img-fluid main-logo main-dark" src="{{ asset('server/assets') }}/images/logo/logo-white.png"
-                                alt="logo">
+                            <img class="img-fluid main-logo main-white"
+                                src="{{ asset('server/assets') }}/images/logo/logo.png" alt="logo">
+                            <img class="img-fluid main-logo main-dark"
+                                src="{{ asset('server/assets') }}/images/logo/logo-white.png" alt="logo">
                         </a>
                     </div>
                     <nav class="sidebar-main">
@@ -434,8 +442,20 @@
             @yield('content')
             <!-- index body end -->
 
+            <!-- footer start-->
+            <div class="container-fluid">
+                <footer class="footer">
+                    <div class="row">
+                        <div class="col-md-12 footer-copyright text-center">
+                            <p class="mb-0">Copyright 2022 © Fastkart theme by pixelstrap</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- footer End-->
         </div>
-        <!-- Page Body End -->
+    </div>
+    <!-- Page Body End -->
     </div>
     <!-- page-wrapper End-->
 
@@ -510,4 +530,5 @@
 
 
 <!-- Mirrored from themes.pixelstrap.com/fastkart/back-end/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 13 Jan 2025 04:01:54 GMT -->
+
 </html>

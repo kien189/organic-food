@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title','Flash Sales')
 @section('content')
 
 
