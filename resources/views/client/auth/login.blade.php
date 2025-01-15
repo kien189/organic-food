@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-@section('title','Login - Register ')
+@section('title', 'Login - Register ')
 @section('content')
     <base href="/">
     <!-- ===============>> account pill start here <<================= -->
@@ -23,7 +23,7 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-login" role="tabpanel"
                         aria-labelledby="pills-login-tab">
-                        <form action="" class="account__form needs-validation" novalidate method="post">
+                        {{-- <form action="" class="account__form needs-validation" novalidate method="post">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-12">
@@ -46,6 +46,44 @@
                                 @error('password')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                            </div>
+                            <div class="account__check">
+                                <div class="account__check-remember">
+                                    <input type="checkbox" class="form-check-input" name="remember" value=""
+                                        id="terms-check">
+                                    <label for="terms-check" class="form-check-label">
+                                        Remember for 30 days
+                                    </label>
+                                </div>
+                                <div class="account__check-forgot">
+                                    <a href="{{ route('forgot-password') }}">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <button type="submit" class="trk-btn trk-btn--border trk-btn--primary d-block mt-4">Login your
+                                account</button>
+                        </form> --}}
+                        <form action="" id="loginForm" class="account__form needs-validation" novalidate
+                            method="post">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div>
+                                        <label for="account-email" class="form-label">User Name Or Email Address</label>
+                                        <input type="email" class="form-control" name="email" id="account-email"
+                                            placeholder="Enter your user name or email" required>
+                                        <small class="text-danger" id="errors-email"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-pass">
+                                        <label for="account-pass" class="form-label">Password</label>
+                                        <input type="password" class="form-control showhide-pass" name="password"
+                                            id="account-pass" placeholder="Password" required>
+                                        <small class="text-danger" id="errors-password"></small>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="account__check">
                                 <div class="account__check-remember">
@@ -147,7 +185,7 @@
                                         <label for="account-email" class="form-label">Email</label>
                                         <input type="email" class="form-control" name="email" id="account-email"
                                             placeholder="Enter Your Email" required>
-                                        <small class="text-danger" id="error-email"></small>
+                                            <small class="text-danger" id="error-email"></small>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -239,7 +277,49 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const registerForm = document.getElementById("registerForm");
+        const loginForm = document.getElementById("loginForm");
+        if (loginForm) {
+            loginForm.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch("/login", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]')
+                                .value,
+                            "Accept": "application/json"
+                        },
+                        body: formData
+                    });
 
+                    if (!response.ok) {
+                        if (response.status === 422) {
+                            const errors = await response.json();
+                            // Hiển thị lỗi
+                            for (const [key, messages] of Object.entries(errors.errors)) {
+                                const errorElement = document.getElementById(`errors-${key}`);
+                                if (errorElement) {
+                                    errorElement.textContent = messages.join(", ");
+                                }
+                            }
+                        } else {
+                            alert("Something went wrong. Please try again.");
+                        }
+                        return;
+                    }
+
+                    const result = await response.json();
+                    // alert(result.message);
+                    form.reset();
+                    window.location.href = "/";
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please check the console for more details.");
+                }
+            })
+        }
         if (registerForm) {
             registerForm.addEventListener("submit", async function(e) {
                 e.preventDefault();
