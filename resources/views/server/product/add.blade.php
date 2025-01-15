@@ -1,239 +1,7 @@
 @extends('server.layout.master')
-@section('title','Create Category')
+@section('title', 'Create Category')
 @section('content')
-<div class="page-body-wrapper">
-    <!-- Page Sidebar Start-->
-    <div class="sidebar-wrapper">
-        <div id="sidebarEffect"></div>
-        <div>
-            <div class="logo-wrapper logo-wrapper-center">
-                <a href="index.html" data-bs-original-title="" title="">
-                    <img class="img-fluid for-white" src="assets/images/logo/full-white.png" alt="logo">
-                </a>
-                <div class="back-btn">
-                    <i class="fa fa-angle-left"></i>
-                </div>
-                <div class="toggle-sidebar">
-                    <i class="ri-apps-line status_toggle middle sidebar-toggle"></i>
-                </div>
-            </div>
-            <div class="logo-icon-wrapper">
-                <a href="index.html">
-                    <img class="img-fluid main-logo main-white" src="assets/images/logo/1-white.png" alt="logo">
-                    <img class="img-fluid main-logo main-dark" src="assets/images/logo/logo-white.png"
-                        alt="logo">
-                </a>
-            </div>
-            <nav class="sidebar-main">
-                <div class="left-arrow" id="left-arrow">
-                    <i data-feather="arrow-left"></i>
-                </div>
-
-                <div id="sidebar-menu">
-                    <ul class="sidebar-links" id="simple-bar">
-                        <li class="back-btn"></li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="index.html">
-                                <i class="ri-home-line"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-store-3-line"></i>
-                                <span>Product</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="products.html">Prodcts</a>
-                                </li>
-
-                                <li>
-                                    <a href="add-new-product.html">Add New Products</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-list-check-2"></i>
-                                <span>Category</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="category.html">Category List</a>
-                                </li>
-
-                                <li>
-                                    <a href="add-new-category.html">Add New Category</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-list-settings-line"></i>
-                                <span>Attributes</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="attributes.html">Attributes</a>
-                                </li>
-
-                                <li>
-                                    <a href="add-new-attributes.html">Add Attributes</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-user-3-line"></i>
-                                <span>Users</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="all-users.html">All users</a>
-                                </li>
-                                <li>
-                                    <a href="add-new-user.html">Add new user</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-user-3-line"></i>
-                                <span>Roles</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="role.html">All roles</a>
-                                </li>
-                                <li>
-                                    <a href="create-role.html">Create Role</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="media.html">
-                                <i class="ri-price-tag-3-line"></i>
-                                <span>Media</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-archive-line"></i>
-                                <span>Orders</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">Order List</a>
-                                </li>
-                                <li>
-                                    <a href="order-detail.html">Order Detail</a>
-                                </li>
-                                <li>
-                                    <a href="order-tracking.html">Order Tracking</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-focus-3-line"></i>
-                                <span>Localization</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="translation.html">Translation</a>
-                                </li>
-
-                                <li>
-                                    <a href="currency-rates.html">Currency Rates</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-price-tag-3-line"></i>
-                                <span>Coupons</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="coupon-list.html">Coupon List</a>
-                                </li>
-
-                                <li>
-                                    <a href="create-coupon.html">Create Coupon</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="taxes.html">
-                                <i class="ri-price-tag-3-line"></i>
-                                <span>Tax</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="product-review.html">
-                                <i class="ri-star-line"></i>
-                                <span>Product Review</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="support-ticket.html">
-                                <i class="ri-phone-line"></i>
-                                <span>Support Ticket</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                <i class="ri-settings-line"></i>
-                                <span>Settings</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="profile-setting.html">Profile Setting</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="reports.html">
-                                <i class="ri-file-chart-line"></i>
-                                <span>Reports</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
-                                <i class="ri-list-check"></i>
-                                <span>List Page</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="right-arrow" id="right-arrow">
-                    <i data-feather="arrow-right"></i>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Page Sidebar Ends-->
-
     <div class="page-body">
-
         <!-- New Product Add Start -->
         <div class="container-fluid">
             <div class="row">
@@ -251,8 +19,7 @@
                                             <label class="form-label-title col-sm-3 mb-0">Product
                                                 Name</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text"
-                                                    placeholder="Product Name">
+                                                <input class="form-control" type="text" placeholder="Product Name">
                                             </div>
                                         </div>
 
@@ -269,8 +36,7 @@
                                         </div>
 
                                         <div class="mb-4 row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Category</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Category</label>
                                             <div class="col-sm-9">
                                                 <select class="js-example-basic-single w-100" name="state">
                                                     <option disabled>Category Menu</option>
@@ -286,8 +52,7 @@
                                         </div>
 
                                         <div class="mb-4 row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Subcategory</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Subcategory</label>
                                             <div class="col-sm-9">
                                                 <select class="js-example-basic-single w-100" name="state">
                                                     <option disabled>Subcategory Menu</option>
@@ -302,8 +67,7 @@
                                         </div>
 
                                         <div class="mb-4 row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Brand</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Brand</label>
                                             <div class="col-sm-9">
                                                 <select class="js-example-basic-single w-100">
                                                     <option disabled>Brand Menu</option>
@@ -336,8 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-4 row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Exchangeable</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Exchangeable</label>
                                             <div class="col-sm-9">
                                                 <label class="switch">
                                                     <input type="checkbox"><span class="switch-state"></span>
@@ -345,12 +108,10 @@
                                             </div>
                                         </div>
                                         <div class="row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Refundable</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Refundable</label>
                                             <div class="col-sm-9">
                                                 <label class="switch">
-                                                    <input type="checkbox" checked=""><span
-                                                        class="switch-state"></span>
+                                                    <input type="checkbox" checked=""><span class="switch-state"></span>
                                                 </label>
                                             </div>
                                         </div>
@@ -388,11 +149,10 @@
 
                                     <form class="theme-form theme-form-2 mega-form">
                                         <div class="mb-4 row align-items-center">
-                                            <label
-                                                class="col-sm-3 col-form-label form-label-title">Images</label>
+                                            <label class="col-sm-3 col-form-label form-label-title">Images</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control form-choose" type="file"
-                                                    id="formFile" multiple>
+                                                <input class="form-control form-choose" type="file" id="formFile"
+                                                    multiple>
                                             </div>
                                         </div>
 
@@ -432,8 +192,7 @@
                                             <label class="form-label-title col-sm-3 mb-0">Video
                                                 Link</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text"
-                                                    placeholder="Video Link">
+                                                <input class="form-control" type="text" placeholder="Video Link">
                                             </div>
                                         </div>
                                     </form>
@@ -668,8 +427,7 @@
                                         <div class="mb-4 row align-items-center">
                                             <label class="form-label-title col-sm-3 mb-0">Page title</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="search"
-                                                    placeholder="Fresh Fruits">
+                                                <input class="form-control" type="search" placeholder="Fresh Fruits">
                                             </div>
                                         </div>
 
@@ -711,28 +469,29 @@
         <!-- footer En -->
     </div>
     <!-- Container-fluid End -->
-</div>
-<!-- Page Body End -->
-</div>
-<!-- page-wrapper End -->
+    </div>
+    <!-- Page Body End -->
+    </div>
+    <!-- page-wrapper End -->
 
-<!-- Modal Start -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog  modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-body">
-            <h5 class="modal-title" id="staticBackdropLabel">Logging Out</h5>
-            <p>Are you sure you want to log out?</p>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal Start -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title" id="staticBackdropLabel">Logging Out</h5>
+                    <p>Are you sure you want to log out?</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-            <div class="button-box">
-                <button type="button" class="btn btn--no" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn  btn--yes btn-primary">Yes</button>
+                    <div class="button-box">
+                        <button type="button" class="btn btn--no" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn  btn--yes btn-primary">Yes</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!-- Modal End -->
+    <!-- Modal End -->
+
 @endsection

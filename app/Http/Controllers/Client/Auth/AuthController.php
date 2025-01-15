@@ -51,7 +51,10 @@ class AuthController extends Controller
             Log::info('Vui lý kiểm tra email để xác thức tài khoản');
             return back()->with('error', 'Vui lý kiểm tra email để xác thức tài khoản');
         }
-        return redirect()->route('home')->with('success', 'Đăng nhập thành công');
+        return response()->json([
+            'status' => true,
+            'message' => 'Đăng nhập thành công',
+        ]);
     }
 
     public function logout()

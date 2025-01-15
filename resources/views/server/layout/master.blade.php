@@ -154,49 +154,50 @@
                             </div>
                         </li>
                         @if (Auth::check() && Auth::user()->hasRole('admin'))
-                        <li class="profile-nav onhover-dropdown pe-0 me-0">
-                            <div class="media profile-media">
-                                <img class="user-profile rounded-circle"
-                                    src="{{ asset('server/assets') }}/images/users/4.jpg" alt="">
-                                <div class="user-name-hide media-body">
-                                    <span>{{ Auth::user()->name }}</span>
-                                    <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i></p>
+                            <li class="profile-nav onhover-dropdown pe-0 me-0">
+                                <div class="media profile-media">
+                                    <img class="user-profile rounded-circle"
+                                        src="{{ asset('server/assets') }}/images/users/4.jpg" alt="">
+                                    <div class="user-name-hide media-body">
+                                        <span>{{ Auth::user()->name }}</span>
+                                        <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <ul class="profile-dropdown onhover-show-div">
-                                <li>
-                                    <a href="all-users.html">
-                                        <i data-feather="users"></i>
-                                        <span>Users</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="order-list.html">
-                                        <i data-feather="archive"></i>
-                                        <span>Orders</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="support-ticket.html">
-                                        <i data-feather="phone"></i>
-                                        <span>Spports Tickets</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-setting.html">
-                                        <i data-feather="settings"></i>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        href="javascript:void(0)">
-                                        <i data-feather="log-out"></i>
-                                        <span>Log out</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                                <ul class="profile-dropdown onhover-show-div">
+                                    <li>
+                                        <a href="all-users.html">
+                                            <i data-feather="users"></i>
+                                            <span>Users</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="order-list.html">
+                                            <i data-feather="archive"></i>
+                                            <span>Orders</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="support-ticket.html">
+                                            <i data-feather="phone"></i>
+                                            <span>Spports Tickets</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="profile-setting.html">
+                                            <i data-feather="settings"></i>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                            href="javascript:void(0)">
+                                            <i data-feather="log-out"></i>
+                                            <span>Log out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                 </div>
@@ -249,15 +250,15 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-store-3-line"></i>
-                                        <span>Product</span>
+                                        <span>Sản phẩm </span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="products.html">Prodcts</a>
+                                            <a href="{{ route('product.index') }}">Danh sách sản phẩm </a>
                                         </li>
 
                                         <li>
-                                            <a href="add-new-product.html">Add New Products</a>
+                                            <a href="{{ route('product.create') }}">Thêm mới sản phẩmphẩm</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -265,15 +266,15 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-list-check-2"></i>
-                                        <span>Category</span>
+                                        <span>Danh mục </span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="category.html">Category List</a>
+                                            <a href="{{ route('category.index') }}">Danh sách danh mục </a>
                                         </li>
 
                                         <li>
-                                            <a href="add-new-category.html">Add New Category</a>
+                                            <a href="{{ route('category.create') }}">Thêm mới danh mục </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -526,6 +527,7 @@
 
     <!-- Theme js -->
     <script src="{{ asset('server/assets') }}/js/script.js"></script>
+    <script src="{{ asset('server/assets') }}/js/slug.js"></script>
 </body>
 
 

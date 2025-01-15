@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::get('/', [HomeController::class, 'admin']);
 
     Route::resources([
-        'products' => ProductController::class,
+        'product' => ProductController::class,
         'category' => CategoryController::class
     ]);
 
@@ -62,4 +62,7 @@ Route::group([], function () {
 
 Route::group(['prefix' => 'sendMail'], function () {
     Route::get('verify/{user}', [VerificationController::class, 'verifyAccount'])->middleware('signed')->name('verifyAccount');
+});
+Route::fallback(function () {
+    return view('errors.client.404');
 });

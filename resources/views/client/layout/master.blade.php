@@ -38,7 +38,6 @@
     <link rel="stylesheet" href="{{ asset('client/assets') }}/css/aos.css">
     <link rel="stylesheet" href="{{ asset('client/assets') }}/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('client/assets') }}/css/swiper-bundle.min.css">
-
     <!-- main css for template -->
     <link rel="stylesheet" href="{{ asset('client/assets') }}/css/style.css">
 </head>
@@ -51,6 +50,18 @@
     </div>
     <!-- ===============>> Preloader end here <<================= -->
 
+
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Thành công!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 
 
 
@@ -341,6 +352,7 @@
     <script src="{{ asset('client/assets') }}/js/purecounter_vanilla.js"></script>
     <script src="{{ asset('client/assets') }}/js/trk-menu.js"></script>
     <script src="{{ asset('client/assets') }}/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
