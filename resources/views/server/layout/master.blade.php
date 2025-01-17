@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Fastkart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+        content="Fastkart admin is super flexible, powerful, clean &amp; modern responsivbbe bootstrap 5 admin template with unlimited possibilities.">
     <meta name="keywords"
         content="admin template, Fastkart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
@@ -241,7 +241,7 @@
                                 <li class="back-btn"></li>
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="index.html">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('dashboard') }}">
                                         <i class="ri-home-line"></i>
                                         <span>Dashboard</span>
                                     </a>
@@ -250,15 +250,15 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-store-3-line"></i>
-                                        <span>Sản phẩm </span>
+                                        <span>Product </span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="{{ route('product.index') }}">Danh sách sản phẩm </a>
+                                            <a href="{{ route('product.index') }}">All Product</a>
                                         </li>
 
                                         <li>
-                                            <a href="{{ route('product.create') }}">Thêm mới sản phẩmphẩm</a>
+                                            <a href="{{ route('product.create') }}">Add Product</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -266,15 +266,15 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-list-check-2"></i>
-                                        <span>Danh mục </span>
+                                        <span>Category</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="{{ route('category.index') }}">Danh sách danh mục </a>
+                                            <a href="{{ route('category.index') }}">All Category</a>
                                         </li>
 
                                         <li>
-                                            <a href="{{ route('category.create') }}">Thêm mới danh mục </a>
+                                            <a href="{{ route('category.create') }}">Add Category </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -528,6 +528,15 @@
     <!-- Theme js -->
     <script src="{{ asset('server/assets') }}/js/script.js"></script>
     <script src="{{ asset('server/assets') }}/js/slug.js"></script>
+
+    <!-- ck editor js -->
+    <script src="{{ asset('server/assets') }}/js/ckeditor.js"></script>
+    <script src="{{ asset('server/assets') }}/js/ckeditor-custom.js"></script>
+
+    <!--Dropzon js -->
+    <script src="{{ asset('server/assets') }}/js/dropzone/dropzone.js"></script>
+    <script src="{{ asset('server/assets') }}/js/dropzone/dropzone-script.js"></script>
+    <!-- Theme js -->
 </body>
 
 

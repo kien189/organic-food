@@ -30,7 +30,7 @@ class AuthController extends Controller
             $createUser = $this->authService->register($request->all());
             return response()->json([
                 'status' => true,
-                'message' => 'Đăng ký tài khoản thành công . Vui lòng kiểm tra email để xác thực tài khoản'
+                'message' => 'Account registration successful. Please check your email to verify your account.'
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -44,23 +44,29 @@ class AuthController extends Controller
     {
         $token = $this->authService->attemptLogin($request->validated());
         if (!$token) {
-            Log::info('Sai tài khoản hoặc mật khẻu');
-            return back()->with('error', 'Sai tài khoản hoặc mật khẩu');
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Wrong account or password'
+                ]
+            );
         }
         if ($this->authService->isEmailNotVerified(Auth::user())) {
-            Log::info('Vui lý kiểm tra email để xác thức tài khoản');
-            return back()->with('error', 'Vui lý kiểm tra email để xác thức tài khoản');
+            return response()->json([
+                'status' => true,
+                'message' => 'Please check your email to verify your account.',
+            ]);
         }
         return response()->json([
             'status' => true,
-            'message' => 'Đăng nhập thành công',
+            'message' => 'Login successfully .',
         ]);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('home')->with('success', 'Đăng xuất thành công .');
+        return redirect()->route('home')->with('success', 'Logout successfully .');
     }
 
 

@@ -37,7 +37,7 @@ class CategoryService
     public function updateCategory($id, array $data, $file = null)
     {
         $category = $this->getCategory($id);
-        if ($data['image']) {
+        if (!empty(($data['image']))) {
             $data['image'] = $this->uploadImage($data['image']);
         }
         $category->update($data);

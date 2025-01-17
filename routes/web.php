@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\HomeController;
@@ -10,11 +11,11 @@ use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\Auth\AuthController;
 use App\Http\Controllers\Client\VerificationController;
 use App\Http\Controllers\Admin\Auth\AuthController as AdminAuthController;
-
+use App\Http\Controllers\Client\WishlistController;
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/', [HomeController::class, 'admin']);
+    Route::get('/', [HomeController::class, 'admin'])->name('dashboard');
 
     Route::resources([
         'product' => ProductController::class,
@@ -29,7 +30,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 });
 
 // User
-Route::group(['middleware' => ['auth', 'role:user']], function () {});
+Route::group(['middleware' => ['auth', 'role:user']], function () {
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update-cart');
+    Route::get('/destroy-cart/{id}', [CartController::class, 'destroyCart'])->name('destroy-cart');
+
+    Route::get('wishlist',[WishlistController::class,'wishlist'])->name('wishlist');
+});
 
 
 // Guest
@@ -57,6 +65,8 @@ Route::group([], function () {
     Route::get('blogs', [BlogController::class, 'blogs'])->name('blogs');
 
     Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+
+    Route::get('/{category}/{slug}',[ShopController::class, 'productDetail'])->name('product-detail');
 });
 
 
