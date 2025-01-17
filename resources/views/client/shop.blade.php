@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-@section('title',' Shop')
+@section('title', ' Shop')
 @section('content')
     <!-- ===============>>Flash Product section start here <<================= -->
     <section class="product padding-top padding-bottom ">
@@ -10,346 +10,47 @@
 
                     <div class="col-lg-9">
                         <div class="row row-cols-xl-4  row-cols-md-3 row-cols-2 row-cols-1 justify-content-center g-3">
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -24%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/1.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Avocado Bliss</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 5.0 <span>(35 Reviews)</span>
+                            @foreach ($products as $pro)
+                                <div class="col">
+                                    <div class="product__item product__item--style2">
+                                        <div class="product__item-inner">
+                                            <div class="product__item-badge">
+                                                @if ($pro->sale_price > 0)
+                                                    {{ round((($pro->price - $pro->sale_price) / $pro->price) * 100) }}
+                                                @endif
                                             </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$12.00 /</h4>
-                                                    <span><del>$50.00</del></span>
+                                            <div class="product__item-thumb">
+                                                <img src="{{ $pro->image }}"
+                                                    alt="Popular Product Images">
+                                            </div>
+                                            <div class="product__item-content">
+                                                <h5><a href="
+                                                    {{ route('product-detail', ['category'
+                                                     => $pro->category->name, 'slug' => $pro->slug]) }}">
+                                                    {{ $pro->name }}
+                                                    </a></h5>
+                                                <div class="product__item-rating">
+                                                    <i class="fa-solid fa-star"></i> 5.0 <span>(35 Reviews)</span>
                                                 </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
+                                                <div class="product__item-footer">
+                                                    <div class="product__item-price">
+                                                        @if ($pro->sale_price > 0)
+                                                        <h4>${{ number_format($pro->price, 2) }}/</h4>
+                                                        @else
+                                                        <h4>${{ number_format($pro->sale_price, 2) }}/</h4>
+                                                        <span><del>${{ number_format($pro->price, 2) }}</del></span>
+                                                        @endif
+
+                                                    </div>
+                                                    <div class="product__item-action">
+                                                        <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -25%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/3.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Berry Burst Pack</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 5.0 <span>(28 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$21.00 /</h4>
-                                                    <span><del>$32.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge product__item-badge--new">
-                                            New
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/4.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Spicy Green Chilli</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.5 <span>(34 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$8.00 /</h4>
-                                                    <span><del>$15.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -20%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/5.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Green Crunch</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.0 <span>(21 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$15.00 /</h4>
-                                                    <span><del>$20.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -15%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/6.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Bloom Delight</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.5 <span>(26 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$16.00 /</h4>
-                                                    <span><del>$20.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -22%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/7.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Vibrant Pepper</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.9 <span>(25 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$6.00 /</h4>
-                                                    <span><del>$10.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -25%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/8.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Crisp Refresher</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.6 <span>(22 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$21.00 /</h4>
-                                                    <span><del>$30.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -12%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/9.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Crisp Leaf Luxury</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 5.0 <span>(24 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$24.00 /</h4>
-                                                    <span><del>$50.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -20%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/10.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Fresh Pumpkin</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.7 <span>(87 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$31.00 /</h4>
-                                                    <span><del>$50.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline ">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -24%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/1.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Avocado Bliss</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 5.0 <span>(35 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$12.00 /</h4>
-                                                    <span><del>$50.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            -15%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/6.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Bloom Delight</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.5 <span>(26 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$16.00 /</h4>
-                                                    <span><del>$20.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="product__item product__item--style2">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge product__item-badge--new">
-                                            New
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ asset('client/assets') }}/images/product/popular/4.png" alt="Popular Product Images">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h5><a href="product-details.html">Spicy Green Chilli</a></h5>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 4.5 <span>(34 Reviews)</span>
-                                            </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>$8.00 /</h4>
-                                                    <span><del>$15.00</del></span>
-                                                </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="product-btn text-center mt-5">
                             <a href="#" class="about__btn trk-btn trk-btn--primary">View More</a>
@@ -402,8 +103,7 @@
                                         <li class="sidebar-filter__item">
                                             <div class="form-check">
                                                 <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="vegetables-check">
+                                                    <input class="form-check-input" type="checkbox" id="vegetables-check">
                                                     <label class="form-check-label d-block"
                                                         for="vegetables-check">Vegetables</label>
                                                 </div>
@@ -415,8 +115,7 @@
                                             <div class="form-check">
                                                 <div class="check-group flex-grow-1">
                                                     <input class="form-check-input" type="checkbox" id="meats-check">
-                                                    <label class="form-check-label d-block"
-                                                        for="meats-check">Meats</label>
+                                                    <label class="form-check-label d-block" for="meats-check">Meats</label>
                                                 </div>
                                                 <span class="sidebar-filter__count">(05)</span>
                                             </div>

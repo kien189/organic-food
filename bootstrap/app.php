@@ -19,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
-            'role_or_permission' => RoleOrPermissionMiddleware::class
+            'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'jwt' =>  \App\Http\Middleware\CheckJwtAuth::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

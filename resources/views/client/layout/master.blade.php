@@ -106,16 +106,16 @@
                 </div>
 
                 <div class="header__action">
-                    @if (Auth::check())
-                        <a class="header__action-btn d-none d-xl-grid" href="{{ route('logout') }}"><i
+                    @if (auth()->check())
+                        <a class="header__action-btn d-none d-xl-grid"  href="{{ route('logout') }}" id="logout-btn" ><i
                                 class="fa-regular fa-user"></i></a>
                     @else
                         <a class="header__action-btn d-none d-xl-grid" href="{{ route('login') }}"><i
                                 class="fa-regular fa-user"></i></a>
                     @endif
-                    <a class="header__action-btn d-none d-xl-grid" href="wishlist.html"><i
+                    <a class="header__action-btn d-none d-xl-grid" href="{{route('wishlist')}}"><i
                             class="fa-regular fa-heart"></i></a>
-                    <a class="header__action-btn d-none d-xl-grid" href="cart.html">
+                    <a class="header__action-btn d-none d-xl-grid" href="{{route('cart')}}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg" class="cart-icon">
                             <path
@@ -132,7 +132,7 @@
                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
-                    <a href="cart.html" class="header__action-btn menu-icon d-xl-none"><i
+                    <a href="{{route('cart')}}" class="header__action-btn menu-icon d-xl-none"><i
                             class="fa-solid fa-cart-shopping"></i></a>
                     <button id="trk-search-icon" class="menu-icon search-icon header__action-btn"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
@@ -233,9 +233,9 @@
                                     <ul class="footer__linklist">
                                         <li class="footer__linklist-item"> <a href="">Sign In</a>
                                         </li>
-                                        <li class="footer__linklist-item"> <a href="cart.html">View Cart</a>
+                                        <li class="footer__linklist-item"> <a href="{{route('cart')}}">View Cart</a>
                                         </li>
-                                        <li class="footer__linklist-item"> <a href="wishlist.html">My Wishlist</a>
+                                        <li class="footer__linklist-item"> <a href="{{route('wishlist')}}">My Wishlist</a>
                                         </li>
                                         <li class="footer__linklist-item"> <a href="invoice.html">Shipping Details</a>
                                         </li>
@@ -353,7 +353,14 @@
     <script src="{{ asset('client/assets') }}/js/trk-menu.js"></script>
     <script src="{{ asset('client/assets') }}/js/custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            cosnt logoutBtn = document.getElementById('logoutBtn');
+            if(logoutBtn){
+                console.log(logoutBtn);
+            }
+        })
+    </script>
 </body>
 
 

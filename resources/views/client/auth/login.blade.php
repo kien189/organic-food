@@ -311,7 +311,8 @@
                     }
 
                     const result = await response.json();
-                    // alert(result.message);
+
+                    alert(result.message);
                     form.reset();
                     window.location.href = "/";
                 } catch (error) {

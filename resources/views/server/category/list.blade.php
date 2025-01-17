@@ -12,12 +12,12 @@
 
                             <div class="title-header option-title d-flex align-items-center">
 
-                                <h5>Danh sách danh mục</h5>
+                                <h5>List Category</h5>
 
                                 <form action="{{ route('category.index') }}" method="GET" class="d-inline-flex">
                                     <div class="input-group mx-3 ">
                                         <input type="text" name="search" class="form-control "
-                                            placeholder="Tìm kiếm danh mục ..." aria-label="Recipient's username"
+                                            placeholder="Search category ..." aria-label="Recipient's username"
                                             aria-describedby="basic-addon2">
                                         <span class="input-group-text bg-white" id="basic-addon2">
                                             <button type="submit" class="border-0 bg-white">
@@ -30,7 +30,7 @@
                                     </div>
                                     <a href="{{ route('category.create') }}"
                                         class="align-items-center btn btn-theme d-flex">
-                                        <i data-feather="plus-square"></i>Thêm mới 
+                                        <i data-feather="plus-square"></i>Add new
                                     </a>
                                 </form>
                             </div>
@@ -41,9 +41,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Product Name</th>
+                                                <th>Category Name</th>
                                                 <th>Date</th>
-                                                <th>Product Image</th>
+                                                <th>Category Image</th>
                                                 <th>Slug</th>
                                                 <th>Option</th>
                                             </tr>
