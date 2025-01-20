@@ -31,7 +31,8 @@ class CartController extends Controller
             return response()->json(['success' => true, 'message' => 'Add product to cart successfully']);
         } catch (\Throwable $e) {
             dd($e)->getMessage();
-            return redirect()->back()->with('error', 'An error has occurred. Please try again . ');
+            return response()->json(['error' => true, 'message' => 'An error has occurred. Please try again . ']);
+
         }
     }
 
@@ -39,7 +40,7 @@ class CartController extends Controller
     {
         try {
             $this->cartService->updateCart($request->all());
-            return redirect()->back()->with('success', 'Update cart successfully .');
+            return response()->json(['success' => true, 'message' => 'Update cart successfully']);
         } catch (\Throwable $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'An error has occurred. Please try again . ');
@@ -59,6 +60,7 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'An error has occurred. Please try again . ');
         }
     }
+
 
 
 }

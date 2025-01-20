@@ -12,7 +12,7 @@ use App\Http\Controllers\Client\Auth\AuthController;
 use App\Http\Controllers\Client\VerificationController;
 use App\Http\Controllers\Admin\Auth\AuthController as AdminAuthController;
 use App\Http\Controllers\Client\WishlistController;
-
+use App\Http\Controllers\Client\OrderController;
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('/', [HomeController::class, 'admin'])->name('dashboard');
@@ -35,8 +35,9 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
     Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update-cart');
     Route::get('/destroy-cart/{id}', [CartController::class, 'destroyCart'])->name('destroy-cart');
-
-    Route::get('wishlist',[WishlistController::class,'wishlist'])->name('wishlist');
+    Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [OrderController::class, 'postCheckout']);
+    Route::get('/wishlist',[WishlistController::class,'wishlist'])->name('wishlist');
 });
 
 
@@ -67,6 +68,8 @@ Route::group([], function () {
     Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
     Route::get('/{category}/{slug}',[ShopController::class, 'productDetail'])->name('product-detail');
+
+    Route::get('/shop/{category}/?{discount}',[ShopController::class, 'filler'])->name('filler');
 });
 
 
