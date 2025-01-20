@@ -46,7 +46,8 @@ class CartService
     public function updateCart(array $data)
     {
         if (!empty($data['quantity']) && $data['quantity'] > 0) {
-            foreach ($data['quantity'] as $key => $value) {
+            $quantity = json_decode($data['quantity'], true);
+            foreach ($quantity  as $key => $value) {
                 $cart = $this->getCart( $key);
                 if (isset($cart)) {
                     $cart->update(['quantity' => $value]);
@@ -60,7 +61,7 @@ class CartService
         $sum = 0 ;
         $cart = $this->getCartByUser();
         foreach ($cart as $key => $value) {
-            $sum += $value->product->price * $value->quantity;
+            $sum += ($value->product->sale_price ?? $value->product->price) * $value->quantity;
         }
         return $sum;
     }

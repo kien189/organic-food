@@ -287,37 +287,43 @@
                     <div class="swiper-wrapper">
                         @foreach ($bestSellerProduct as $bestSellerr)
                             <div class="swiper-slide">
-                                <input type="hidden" name="product_id" value="{{ $bestSellerr->id }}">
-                                <div class="product__item product__item--style1">
-                                    <div class="product__item-inner">
-                                        <div class="product__item-badge">
-                                            {{ round((($bestSellerr->price - $bestSellerr->sale_price) / $bestSellerr->price) * 100) }}%
-                                        </div>
-                                        <div class="product__item-thumb">
-                                            <img src="{{ $bestSellerr->image }}" alt="Abundant Fruit Collection">
-                                        </div>
-                                        <div class="product__item-content">
-                                            <h4><a
-                                                    href="{{ route('product-detail', ['category' => $bestSellerr->category->name, 'slug' => $bestSellerr->slug]) }}">{{ $bestSellerr->name }}</a>
-                                            </h4>
-                                            <div class="product__item-rating">
-                                                <i class="fa-solid fa-star"></i> 5.0 <span>(12 Reviews)</span>
+                                <form action="" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $bestSellerr->id }}">
+                                    <div class="product__item product__item--style1">
+                                        <div class="product__item-inner">
+                                            <div class="product__item-badge">
+                                                {{ round((($bestSellerr->price - $bestSellerr->sale_price) / $bestSellerr->price) * 100) }}%
                                             </div>
-                                            <div class="product__item-footer">
-                                                <div class="product__item-price">
-                                                    <h4>{{ number_format($bestSellerr->sale_price, 2) ?? number_format($bestSellerr->price, 2) }}
-                                                        /</h4>
-                                                    @if ($bestSellerr->sale_price > 0)
-                                                        <span><del>{{ number_format($bestSellerr->price, 2) }}</del></span>
-                                                    @endif
+                                            <div class="product__item-thumb">
+                                                <img src="{{ $bestSellerr->image }}" alt="Abundant Fruit Collection">
+                                            </div>
+                                            <div class="product__item-content">
+                                                <h4><a
+                                                        href="{{ route('product-detail', ['category' => $bestSellerr->category->name, 'slug' => $bestSellerr->slug]) }}">{{ $bestSellerr->name }}</a>
+                                                </h4>
+                                                <div class="product__item-rating">
+                                                    <i class="fa-solid fa-star"></i> 5.0 <span>(12 Reviews)</span>
                                                 </div>
-                                                <div class="product__item-action">
-                                                    <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
+                                                <div class="product__item-footer">
+                                                    <div class="product__item-price">
+                                                        <h4>{{ number_format($bestSellerr->sale_price, 2) ?? number_format($bestSellerr->price, 2) }}
+                                                            /</h4>
+                                                        @if ($bestSellerr->sale_price > 0)
+                                                            <span><del>{{ number_format($bestSellerr->price, 2) }}</del></span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="product__item-action">
+                                                        <a type="submit" class="trk-btn trk-btn--outline addtocart_btn"
+                                                            data-product-id="{{ $bestSellerr->id }}" id="addToCart">
+                                                            Add to cart
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         @endforeach
                     </div>
@@ -411,7 +417,7 @@
                         aria-labelledby="pills-all-tab">
                         <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center g-3">
                             @foreach ($listProduct as $list)
-                                <form action="{{ route('add-to-cart') }}" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     <div class="col">
                                         <input type="hidden" name="product_id" id="product_id"
@@ -451,10 +457,11 @@
                                                         @endif
 
                                                         <div class="product__item-action">
-                                                            <button type="submit" class="trk-btn trk-btn--outline"
-                                                                id="addToCart">
+                                                            <a type="submit"
+                                                                class="trk-btn trk-btn--outline addtocart_btn"
+                                                                data-product-id="{{ $list->id }}" id="addToCart">
                                                                 Add to cart
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -469,49 +476,56 @@
                         aria-labelledby=" pills-new-arrivals-tab">
                         <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center g-3">
                             @foreach ($newProduct as $newPro)
-                                <div class="col">
-                                    <input type="hidden" name="product_id" value="{{ $newPro->id }}">
-                                    <div class="product__item product__item--style2">
-                                        <div class="product__item-inner active">
-                                            @if ($newPro->sale_price > 0)
-                                                <div class="product__item-badge">
-                                                    {{ round((($newPro->price - $newPro->sale_price) / $newPro->price) * 100) }}%
+                                <form action="" method="post">
+                                    @csrf
+                                    <div class="col">
+                                        <input type="hidden" name="product_id" value="{{ $newPro->id }}">
+                                        <div class="product__item product__item--style2">
+                                            <div class="product__item-inner active">
+                                                @if ($newPro->sale_price > 0)
+                                                    <div class="product__item-badge">
+                                                        {{ round((($newPro->price - $newPro->sale_price) / $newPro->price) * 100) }}%
+                                                    </div>
+                                                @endif
+                                                <div class="product__item-thumb">
+                                                    <img src="{{ $newPro->image }}" alt="Popular Product Images">
                                                 </div>
-                                            @endif
-                                            <div class="product__item-thumb">
-                                                <img src="{{ $newPro->image }}" alt="Popular Product Images">
-                                            </div>
-                                            <div class="product__item-content">
-                                                <h5><a
-                                                        href="{{ route('product-detail', ['category' => $newPro->category->name, 'slug' => $newPro->slug]) }}">{{ $newPro->name }}</a>
-                                                </h5>
-                                                <div class="product__item-rating">
-                                                    <i class="fa-solid fa-star"></i> 4.7 <span>(67 Reviews)</span>
-                                                </div>
-                                                <div class="product__item-footer">
-                                                    @if ($newPro->sale_price > 0)
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($newPro->sale_price, 2) }}/
-                                                            </h4>
-                                                            <span><del>${{ number_format($newPro->price, 2) }}</del></span>
+                                                <div class="product__item-content">
+                                                    <h5><a
+                                                            href="{{ route('product-detail', ['category' => $newPro->category->name, 'slug' => $newPro->slug]) }}">{{ $newPro->name }}</a>
+                                                    </h5>
+                                                    <div class="product__item-rating">
+                                                        <i class="fa-solid fa-star"></i> 4.7 <span>(67 Reviews)</span>
+                                                    </div>
+                                                    <div class="product__item-footer">
+                                                        @if ($newPro->sale_price > 0)
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($newPro->sale_price, 2) }}/
+                                                                </h4>
+                                                                <span><del>${{ number_format($newPro->price, 2) }}</del></span>
 
-                                                        </div>
-                                                    @else
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($newPro->price, 2) }}
-                                                            </h4>
-                                                            {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
+                                                            </div>
+                                                        @else
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($newPro->price, 2) }}
+                                                                </h4>
+                                                                {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
 
+                                                            </div>
+                                                        @endif
+                                                        <div class="product__item-action">
+                                                            <a type="submit"
+                                                                class="trk-btn trk-btn--outline addtocart_btn"
+                                                                data-product-id="{{ $list->id }}" id="addToCart">
+                                                                Add to cart
+                                                            </a>
                                                         </div>
-                                                    @endif
-                                                    <div class="product__item-action">
-                                                        <a class="trk-btn trk-btn--outline ">Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             @endforeach
 
                         </div>
@@ -520,50 +534,57 @@
                         <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center g-3">
 
                             @foreach ($listProduct as $list)
-                                <div class="col">
-                                    <input type="hidden" name="product_id" value="{{ $list->id }}">
+                                <form action="" method="post">
+                                    @csrf
+                                    <div class="col">
+                                        <input type="hidden" name="product_id" value="{{ $list->id }}">
 
-                                    <div class="product__item product__item--style2">
-                                        <div class="product__item-inner active">
-                                            @if ($list->sale_price > 0)
-                                                <div class="product__item-badge">
-                                                    {{ round((($list->price - $list->sale_price) / $list->price) * 100) }}%
+                                        <div class="product__item product__item--style2">
+                                            <div class="product__item-inner active">
+                                                @if ($list->sale_price > 0)
+                                                    <div class="product__item-badge">
+                                                        {{ round((($list->price - $list->sale_price) / $list->price) * 100) }}%
+                                                    </div>
+                                                @endif
+                                                <div class="product__item-thumb">
+                                                    <img src="{{ $list->image }}" alt="Popular Product Images">
                                                 </div>
-                                            @endif
-                                            <div class="product__item-thumb">
-                                                <img src="{{ $list->image }}" alt="Popular Product Images">
-                                            </div>
-                                            <div class="product__item-content">
-                                                <h5><a
-                                                        href="{{ route('product-detail', ['category' => $list->category->name, 'slug' => $list->slug]) }}">{{ $list->name }}</a>
-                                                </h5>
-                                                <div class="product__item-rating">
-                                                    <i class="fa-solid fa-star"></i> 4.7 <span>(67 Reviews)</span>
-                                                </div>
-                                                <div class="product__item-footer">
-                                                    @if ($newPro->sale_price > 0)
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($list->sale_price, 2) }}/
-                                                            </h4>
-                                                            <span><del>${{ number_format($list->price, 2) }}</del></span>
+                                                <div class="product__item-content">
+                                                    <h5><a
+                                                            href="{{ route('product-detail', ['category' => $list->category->name, 'slug' => $list->slug]) }}">{{ $list->name }}</a>
+                                                    </h5>
+                                                    <div class="product__item-rating">
+                                                        <i class="fa-solid fa-star"></i> 4.7 <span>(67 Reviews)</span>
+                                                    </div>
+                                                    <div class="product__item-footer">
+                                                        @if ($newPro->sale_price > 0)
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($list->sale_price, 2) }}/
+                                                                </h4>
+                                                                <span><del>${{ number_format($list->price, 2) }}</del></span>
 
-                                                        </div>
-                                                    @else
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($list->price, 2) }}
-                                                            </h4>
-                                                            {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
+                                                            </div>
+                                                        @else
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($list->price, 2) }}
+                                                                </h4>
+                                                                {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
 
+                                                            </div>
+                                                        @endif
+                                                        <div class="product__item-action">
+                                                            <a type="submit"
+                                                                class="trk-btn trk-btn--outline addtocart_btn"
+                                                                data-product-id="{{ $list->id }}" id="addToCart">
+                                                                Add to cart
+                                                            </a>
                                                         </div>
-                                                    @endif
-                                                    <div class="product__item-action">
-                                                        <a class="trk-btn trk-btn--outline ">Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             @endforeach
 
 
@@ -574,50 +595,57 @@
                         aria-labelledby="pills-best-sellers-tab">
                         <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
                             @foreach ($bestSellerProduct as $bestSeller)
-                                <div class="col">
-                                    <div class="product__item product__item--style2">
-                                        <div class="product__item-inner">
-                                            <input type="hidden" name="product_id" value="{{ $bestSeller->id }}">
-                                            @if ($list->sale_price > 0)
-                                                <div class="product__item-badge">
-                                                    {{ round((($list->price - $list->sale_price) / $list->price) * 100) }}%
-                                                </div>
-                                            @endif
-                                            <div class="product__item-thumb">
-                                                <img src="{{ $bestSeller->image }}" alt="Popular Product Images">
-                                            </div>
-                                            <div class="product__item-content">
-                                                <h5><a
-                                                        href="{{ route('product-detail', ['category' => $bestSellerr->category->name, 'slug' => $bestSellerr->slug]) }}">{{ $bestSeller->name }}</a>
-                                                </h5>
-                                                <div class="product__item-rating">
-                                                    <i class="fa-solid fa-star"></i> 4.7 <span>(87 Reviews)</span>
-                                                </div>
-                                                <div class="product__item-footer">
-                                                    @if ($newPro->sale_price > 0)
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($bestSeller->sale_price, 2) }}/
-                                                            </h4>
-                                                            <span><del>${{ number_format($bestSeller->price, 2) }}</del></span>
-
-                                                        </div>
-                                                    @else
-                                                        <div class="product__item-price">
-                                                            <h4>${{ number_format($bestSeller->price, 2) }}
-                                                            </h4>
-                                                            {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
-
-                                                        </div>
-                                                    @endif
-                                                    <div class="product__item-action">
-                                                        <a class="trk-btn trk-btn--outline ">Add to cart</a>
+                                <form action="" method="post">
+                                    @csrf
+                                    <div class="col">
+                                        <div class="product__item product__item--style2">
+                                            <div class="product__item-inner">
+                                                <input type="hidden" name="product_id" value="{{ $bestSeller->id }}">
+                                                @if ($list->sale_price > 0)
+                                                    <div class="product__item-badge">
+                                                        {{ round((($list->price - $list->sale_price) / $list->price) * 100) }}%
                                                     </div>
+                                                @endif
+                                                <div class="product__item-thumb">
+                                                    <img src="{{ $bestSeller->image }}" alt="Popular Product Images">
                                                 </div>
+                                                <div class="product__item-content">
+                                                    <h5><a
+                                                            href="{{ route('product-detail', ['category' => $bestSellerr->category->name, 'slug' => $bestSellerr->slug]) }}">{{ $bestSeller->name }}</a>
+                                                    </h5>
+                                                    <div class="product__item-rating">
+                                                        <i class="fa-solid fa-star"></i> 4.7 <span>(87 Reviews)</span>
+                                                    </div>
+                                                    <div class="product__item-footer">
+                                                        @if ($newPro->sale_price > 0)
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($bestSeller->sale_price, 2) }}/
+                                                                </h4>
+                                                                <span><del>${{ number_format($bestSeller->price, 2) }}</del></span>
 
+                                                            </div>
+                                                        @else
+                                                            <div class="product__item-price">
+                                                                <h4>${{ number_format($bestSeller->price, 2) }}
+                                                                </h4>
+                                                                {{-- <span><del>${{ number_format($list->price, 2) }}</del></span> --}}
+
+                                                            </div>
+                                                        @endif
+                                                        <div class="product__item-action">
+                                                            <a type="submit"
+                                                                class="trk-btn trk-btn--outline addtocart_btn"
+                                                                data-product-id="{{ $list->id }}" id="addToCart">
+                                                                Add to cart
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             @endforeach
 
 
@@ -1013,135 +1041,54 @@
             <div class="product__wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <div class="product-feature__slider swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="product__item product__item--style2">
-                                <div class="product__item-inner">
-                                    <div class="product__item-thumb">
-                                        <img src="{{ asset('client/assets') }}/images/product/popular/6.png"
-                                            alt="Popular Product Images">
-                                    </div>
-                                    <div class="product__item-content">
-                                        <h5><a href="product-details.html">Bloom Delight</a></h5>
-                                        <div class="product__item-rating">
-                                            <i class="fa-solid fa-star"></i> 4.9 <span>(29 Reviews)</span>
-                                        </div>
-                                        <div class="product__item-footer">
-                                            <div class="product__item-price">
-                                                <h4>$32.00</h4>
+                        @foreach ($listProduct as $list)
+                            <div class="swiper-slide">
+                                <form action="" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $list->id }}">
+                                    <div class="product__item product__item--style1">
+                                        <div class="product__item-inner">
+                                            @if (isset($list->sale_price))
+                                                <div class="product__item-badge">
+                                                    {{ round((($list->price - $list->sale_price) / $list->price) * 100) }}%
+                                                </div>
+                                            @endif
+                                            <div class="product__item-thumb">
+                                                <img src="{{ $list->image }}" alt="Abundant Fruit Collection">
                                             </div>
-                                            <div class="product__item-action">
-                                                <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
+                                            <div class="product__item-content">
+                                                <h4><a
+                                                        href="{{ route('product-detail', ['category' => $list->category->name, 'slug' => $list->slug]) }}">{{ $list->name }}</a>
+                                                </h4>
+                                                <div class="product__item-rating">
+                                                    <i class="fa-solid fa-star"></i> 5.0 <span>(12 Reviews)</span>
+                                                </div>
+                                                <div class="product__item-footer">
+                                                    <div class="product__item-price">
+                                                        @if (isset($list->sale_price))
+                                                            <h4>${{ number_format($list->sale_price, 2) }}
+                                                                /</h4>
+                                                            <span><del>${{ number_format($list->price, 2) }}</del></span>
+                                                        @else
+                                                            <h4>${{ number_format($list->price, 2) }}
+                                                            </h4>
+                                                        @endif
 
+                                                    </div>
+                                                    <div class="product__item-action">
+                                                        <a type="submit" class="trk-btn trk-btn--outline addtocart_btn"
+                                                            data-product-id="{{ $list->id }}" id="addToCart">
+                                                            Add to cart
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                        </div>
+                        @endforeach
 
-                        <div class="swiper-slide">
-                            <div class="product__item product__item--style2">
-                                <div class="product__item-inner">
-                                    <div class="product__item-thumb">
-                                        <img src="{{ asset('client/assets') }}/images/product/popular/7.png"
-                                            alt="Popular Product Images">
-                                    </div>
-                                    <div class="product__item-content">
-                                        <h5><a href="product-details.html">Vibrant Pepper</a></h5>
-                                        <div class="product__item-rating">
-                                            <i class="fa-solid fa-star"></i> 5.0 <span>(33 Reviews)</span>
-                                        </div>
-                                        <div class="product__item-footer">
-                                            <div class="product__item-price">
-                                                <h4>$23.00</h4>
-                                            </div>
-                                            <div class="product__item-action">
-                                                <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="product__item product__item--style2">
-                                <div class="product__item-inner">
-                                    <div class="product__item-thumb">
-                                        <img src="{{ asset('client/assets') }}/images/product/popular/8.png"
-                                            alt="Popular Product Images">
-                                    </div>
-                                    <div class="product__item-content">
-                                        <h5><a href="product-details.html">Crisp Refresher</a></h5>
-                                        <div class="product__item-rating">
-                                            <i class="fa-solid fa-star"></i> 4.5 <span>(108 Reviews)</span>
-                                        </div>
-                                        <div class="product__item-footer">
-                                            <div class="product__item-price">
-                                                <h4>$38.00</h4>
-                                            </div>
-                                            <div class="product__item-action">
-                                                <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="product__item product__item--style2">
-                                <div class="product__item-inner">
-                                    <div class="product__item-thumb">
-                                        <img src="{{ asset('client/assets') }}/images/product/popular/9.png"
-                                            alt="Popular Product Images">
-                                    </div>
-                                    <div class="product__item-content">
-                                        <h5><a href="product-details.html">Crisp Leaf Luxury</a></h5>
-                                        <div class="product__item-rating">
-                                            <i class="fa-solid fa-star"></i> 4.5 <span>(157 Reviews)</span>
-                                        </div>
-                                        <div class="product__item-footer">
-                                            <div class="product__item-price">
-                                                <h4>$27.00</h4>
-                                            </div>
-                                            <div class="product__item-action">
-                                                <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="product__item product__item--style2">
-                                <div class="product__item-inner">
-                                    <div class="product__item-thumb">
-                                        <img src="{{ asset('client/assets') }}/images/product/popular/10.png"
-                                            alt="Popular Product Images">
-                                    </div>
-                                    <div class="product__item-content">
-                                        <h5><a href="product-details.html">Fresh Pumpkin</a></h5>
-                                        <div class="product__item-rating">
-                                            <i class="fa-solid fa-star"></i> 5.0 <span>(08 Reviews)</span>
-                                        </div>
-                                        <div class="product__item-footer">
-                                            <div class="product__item-price">
-                                                <h4>$24.00</h4>
-                                            </div>
-                                            <div class="product__item-action">
-                                                <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1338,7 +1285,7 @@
     </div>
     <!-- ===============>> Feature bar section end here <<================= -->
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const forms = document.querySelectorAll("form"); // Lấy tất cả các form
 
@@ -1356,7 +1303,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': csrfToken,
                                 'Accept': 'application/json',
-                            },   
+                            },
                             body: formData
                         });
 
@@ -1373,5 +1320,46 @@
                 });
             });
         });
+    </script> --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addtocart_btn = document.querySelectorAll('.addtocart_btn');
+            addtocart_btn.forEach(btn => {
+                btn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+
+                    const form = btn.closest('form')
+                    if (form) {
+                        // form.submit();
+                        const product_id = btn.getAttribute('data-product-id');
+                        const formData = new FormData(form);
+                        formData.append('product_id', product_id);
+
+                        try {
+                            const response = await fetch('/add-to-cart', {
+                                method: 'POST',
+                                headers: {
+                                    "X-CSRF-TOKEN": document.querySelector(
+                                            'input[name="_token"]')
+                                        .value
+                                },
+                                body: formData
+                            });
+
+                            const data = await response.json(); // Xử lý phản hồi từ server
+                            if (response.ok) {
+                                alert(data.message);
+                                // Thực hiện hành động khi thêm thành công (ví dụ, cập nhật giỏ hàng, thông báo)
+                            } else {
+                                console.error("Error adding product to cart:", data);
+                            }
+                        } catch (error) {
+                            console.error("Fetch error:", error);
+                        }
+                    }
+
+                })
+            })
+        })
     </script>
 @endsection

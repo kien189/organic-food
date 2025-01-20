@@ -45,27 +45,26 @@
                                 </thead>
                                 <tbody>
                                     <!-- Hiển thị tổng số sản phẩm trong giỏ -->
-                                    <form action="{{ route('update-cart') }}" method="post">
-                                        @csrf
-                                        @foreach ($cart as $car)
-                                            <tr>
-                                                <td class="cart__item">
-                                                    <div class="cart__item-thumb">
-                                                        <a href="#"><img src="{{ $car->product->image }}"
-                                                                alt="product"></a>
-                                                    </div>
-                                                    <div class="cart__item-content">
-                                                        <h4><a
-                                                                href="
+
+                                    @foreach ($cart as $car)
+                                        <tr>
+                                            <td class="cart__item">
+                                                <div class="cart__item-thumb">
+                                                    <a href="#"><img src="{{ $car->product->image }}"
+                                                            alt="product"></a>
+                                                </div>
+                                                <div class="cart__item-content">
+                                                    <h4><a
+                                                            href="
                                                   {{ route('product-detail', ['category' => $car->product->category->name, 'slug' => $car->product->slug]) }}
                                                 ">{{ $car->product->name }}</a>
-                                                        </h4>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    ${{ number_format($car->product->sale_price ?? $car->product->price, 2) }}
-                                                </td>
-                                                {{-- <td class="cart__quantity align-middle">
+                                                    </h4>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                ${{ number_format($car->product->sale_price ?? $car->product->price, 2) }}
+                                            </td>
+                                            {{-- <td class="cart__quantity align-middle">
                                                     <div class="quantity-button quantity-button--style2">
                                                         <div class="quantity-button quantity-button--style2">
                                                             <button type="submit" name="quantity[{{ $car->id }}]"
@@ -80,29 +79,33 @@
                                                         </div>
                                                     </div>
                                                 </td> --}}
-                                                <td class="cart__quantity  align-middle">
-                                                    <div class="quantity-button quantity-button--style2">
-                                                      <button class="quantity-button__control quantity-button__control--decrease">-</button>
-                                                      <span class="quantity-button__display" data-update-id={{ $car->id }}>{{ $car->quantity }}</span>
-                                                      <button class="quantity-button__control quantity-button__control--increase">+</button>
-                                                    </div>
-                                                  </td>
-                                                <td class="align-middle">
-                                                    ${{ number_format($car->product->sale_price ?? $car->product->price * $car->quantity, 2) }}
-                                                </td>
-                                                <td class="align-middle"><a class="trk-btn trk-btn--outline ">Add to
-                                                        cart</a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="close-btn">
-                                                        {{-- <a id="remove" href="{{ route('destroy-cart', $car->id)}}"><span><i class="fa-solid fa-xmark"></i></span></a> --}}
-                                                        <a id="remove" data-id="{{ $car->id }}"><span><i
-                                                                    class="fa-solid fa-xmark"></i></span></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </form>
+                                            <td class="cart__quantity  align-middle">
+                                                <div class="quantity-button quantity-button--style2">
+                                                    <button
+                                                        class="quantity-button__control quantity-button__control--decrease"
+                                                        {{ $car->quantity <= 1 ? 'disabled' : '' }}
+                                                        >-</button>
+                                                    <span class="quantity-button__display"
+                                                        data-update-id={{ $car->id }}>{{ $car->quantity }}</span>
+                                                    <button
+                                                        class="quantity-button__control quantity-button__control--increase">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                ${{ number_format(($car->product->sale_price ?? $car->product->price) * $car->quantity, 2) }}
+                                            </td>
+                                            <td class="align-middle"><a class="trk-btn trk-btn--outline ">Add to
+                                                    cart</a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="close-btn">
+                                                    {{-- <a id="remove" href="{{ route('destroy-cart', $car->id)}}"><span><i class="fa-solid fa-xmark"></i></span></a> --}}
+                                                    <a id="remove" data-id="{{ $car->id }}"><span><i
+                                                                class="fa-solid fa-xmark"></i></span></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                     <tr>
                                         <td colspan="6">
@@ -120,9 +123,14 @@
                                                             now</button>
                                                     </div>
                                                 </div>
-                                                <div class="cart__btn">
-                                                    <a href="#" class="trk-btn trk-btn--primary">Update cart</a>
-                                                </div>
+                                                <form action="{{ route('update-cart') }}" id="update-cart" method="post">
+                                                    @csrf
+                                                    <div class="cart__btn">
+                                                        <button type="submit" class="trk-btn trk-btn--primary">Update
+                                                            cart</button>
+                                                    </div>
+                                                </form>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -152,7 +160,7 @@
                                 <span>${{ number_format($total, 2) }}</span>
                             </div>
 
-                            <a href="chackout.html" class="trk-btn trk-btn--primary">Proceed to checkout</a>
+                            <a href="{{ route('checkout') }}" class="trk-btn trk-btn--primary">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
@@ -236,21 +244,72 @@
             });
 
 
-            const form = document.querySelectorAll('form')
-            form.forEach(e => {
-                e.addEventListener('submit', async (e) => {
-                    e.preventDefault();
+            const form = document.getElementById('update-cart')
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-                    const formData =  new FormData(form);
+                const formData = new FormData();
+                const quantities = {}; // Mảng chứa key (ID sản phẩm) và value (số lượng)
 
-                    const quantity = form.querySelector("span.quantity-button__display").textContent
-                        .trim();
-                    formData.append("quantity", quantity);
-                    console.log(quantity);
+                document.querySelectorAll("span.quantity-button__display").forEach((
+                    quantityElement) => {
+                    const quantity = quantityElement.textContent.trim();
+                    const updateId = quantityElement.getAttribute(
+                        'data-update-id'); // Lấy ID từ data-update-id
 
-                })
+                    // Thêm vào mảng quantities
+                    quantities[updateId] = quantity;
+                });
+                console.log(quantities);
+
+                // Thêm mảng quantities vào FormData
+                formData.append("quantity", JSON.stringify(
+                    quantities)); // Chuyển mảng quantities thành chuỗi JSON
+
+                try {
+                    // Gửi dữ liệu lên server
+                    const response = await fetch("/update-cart", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]')
+                                .value,
+                            "Accept": "application/json"
+                        },
+                        body: formData
+                    })
+                    if (!response.ok) {
+                        if (response.status === 422) {
+                            const errors = await response.json();
+                            // Hiển thị lỗi
+                            for (const [key, messages] of Object.entries(errors.errors)) {
+                                const errorElement = document.getElementById(`errors-${key}`);
+                                if (errorElement) {
+                                    errorElement.textContent = messages.join(", ");
+                                }
+                            }
+                        } else {
+                            alert("Something went wrong. Please try again.");
+                        }
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    window.location.reload();
+
+                    // Sau khi reload, hiển thị thông báo
+                    setTimeout(() => {
+                        alert("Cart updated successfully!");
+                    }, 100);
+
+                    // Reload trang
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please check the console for more details.");
+                }
 
             })
+
         })
     </script>
 @endsection

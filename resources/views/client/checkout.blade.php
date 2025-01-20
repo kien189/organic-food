@@ -1,11 +1,12 @@
 @extends('client.layout.master')
-@section('title','Checkout')
+@section('title', 'Checkout')
 @section('content')
     <!-- ============ shop Section start Here========== -->
     <section class="checkout padding-top padding-bottom">
         <div class="container">
             <div class="checkout__wrapper">
-                <form action="#" class="checkout__form">
+                <form action="" class="checkout__form" method="post">
+                    @csrf
                     <div class="row g-5">
                         <div class="col-lg-7">
                             <div class="checkout__details" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
@@ -21,43 +22,44 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="first-name"
-                                                placeholder="First name*" required>
+                                            <input type="text" class="form-control" name="name" id="first-name"
+                                                placeholder="Full name*">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="last-name"
-                                                placeholder="Last name*" required>
+                                            <input type="email" class="form-control" name="email" id="email"
+                                                placeholder="Email *">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="address" placeholder="Address*"
-                                                required>
+                                            <input type="text" class="form-control" name="phone" id="phone"
+                                                placeholder="Phone *">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="address2"
-                                                placeholder="Address 2" required>
+                                            <input type="text" class="form-control" name="address" id="address"
+                                                placeholder="Address*">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    {{-- <div class="col-lg-6">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="city"
-                                                placeholder="City/Town*" required>
+                                                placeholder="City/Town*" >
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="zip-code"
-                                                placeholder="Zip Code*" required>
+                                                placeholder="Zip Code*" >
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-12">
                                         <div class="input-group">
-                                            <textarea id="account-desc" class="form-control" rows="4" placeholder="Write a message..." cols="50"></textarea>
+                                            <textarea id="account-desc" class="form-control" name="note" rows="4" placeholder="Write a message..."
+                                                cols="50"></textarea>
                                         </div>
                                     </div>
 
@@ -90,117 +92,49 @@
                                                 <td colspan="2">
                                                     <table class="table table-borderless">
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="o-info">
-                                                                        <img src="{{ asset('client/assets') }}/images/product/order/1.png"
-                                                                            alt="product">
-                                                                        <div class="o-details">
-                                                                            <div class="c-reviews">
-                                                                                <ul>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <p>(13 reviews)</p>
+                                                            @foreach ($cart as $car)
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="o-info">
+                                                                            <img src="{{ $car->product->image }}"
+                                                                                alt="product">
+                                                                            <div class="o-details">
+                                                                                <div class="c-reviews">
+                                                                                    <ul>
+                                                                                        <li><i class="fa-solid fa-star"></i>
+                                                                                        </li>
+                                                                                        <li><i class="fa-solid fa-star"></i>
+                                                                                        </li>
+                                                                                        <li><i class="fa-solid fa-star"></i>
+                                                                                        </li>
+                                                                                        <li><i class="fa-solid fa-star"></i>
+                                                                                        </li>
+                                                                                        <li><i class="fa-solid fa-star"></i>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    <p>(13 reviews)</p>
+                                                                                </div>
+                                                                                <a href="product-details.html">{{ $car->product->name }}
+                                                                                    X {{ $car->quantity }}</a>
                                                                             </div>
-                                                                            <a href="product-details.html">Organic Greek
-                                                                                Delicacies for Culinary Odyssey</a>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </td>
-                                                                <td>$21.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="o-info">
-                                                                        <img src="{{ asset('client/assets') }}/images/product/order/2.png"
-                                                                            alt="product">
-                                                                        <div class="o-details">
-                                                                            <div class="c-reviews">
-                                                                                <ul>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="fa-solid fa-star mute"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <p>(20 reviews)</p>
-                                                                            </div>
-                                                                            <a href="product-details.html">Organic Delights
-                                                                                for a Sweet and Healthy Treat</a>
 
                                                                         </div>
 
-                                                                    </div>
-
-                                                                </td>
-                                                                <td>$12.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="o-info">
-                                                                        <img src="{{ asset('client/assets') }}/images/product/order/3.png"
-                                                                            alt="course">
-                                                                        <div class="o-details">
-                                                                            <div class="c-reviews">
-                                                                                <ul>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i class="fa-solid fa-star"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="fa-solid fa-star mute"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="fa-solid fa-star mute"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <p>(05 reviews)</p>
-                                                                            </div>
-                                                                            <a href="course-details.html">Pure Organic
-                                                                                Goodness for Your Culinary
-                                                                                Creations</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>$18.00</td>
-                                                            </tr>
+                                                                    </td>
+                                                                    <td>${{ $car->product->sale_price ?? $car->product->price }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Sub Total</th>
-                                                <td>$340.00</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Discount</th>
-                                                <td>$40.00</td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>Total &#40; USD &#41; <p>VAT included, where applicable</p>
                                                 </th>
-                                                <td><strong>$300.00</strong></td>
+                                                <td><strong id="total">${{ number_format($total, 2) }}</strong></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -240,7 +174,20 @@
                                     <div class="order__option-item">
                                         <div class="form-radio-wrapper">
                                             <input class="form-radio" type="radio" name="payment-radio" value=""
-                                                id="cash">
+                                                id="paypalCheck">
+                                            <label class="form-check-label" for="paypalCheck">
+                                                Vnpay
+                                            </label>
+                                        </div>
+                                        <div class="thumb">
+                                            <img src="https://i.ibb.co/6WbZ0RL/method-vnpayqr.png" width="80px"
+                                                alt="payment icon">
+                                        </div>
+                                    </div>
+                                    <div class="order__option-item">
+                                        <div class="form-radio-wrapper">
+                                            <input class="form-radio" type="radio" checked name="payment-radio"
+                                                value="" id="cash">
                                             <label class="form-check-label" for="cash">
                                                 Cash on Delivery
                                             </label>
@@ -315,4 +262,57 @@
         </div>
     </div>
     <!-- ===============>> Feature bar section end here <<================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const total = document.getElementById('total').textContent;
+            const totalValue = parseFloat(total.replace(/[^0-9.-]+/g, ''));
+            // console.log(totalValue);
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                formData.append('amount', totalValue);
+
+                // formData.forEach(function(value, key) {
+                //     console.log(key + ': ' + value);
+                // })
+                try {
+                    const response = await fetch('/checkout', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]')
+                                .value,
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    });
+                    if (!response.ok) {
+                        if (response.status === 422) {
+                            const errors = await response.json();
+                            // Hiển thị lỗi
+                            for (const [key, messages] of Object.entries(errors.errors)) {
+                                const errorElement = document.getElementById(`errors-${key}`);
+                                if (errorElement) {
+                                    errorElement.textContent = messages.join(", ");
+                                }
+                            }
+                        } else {
+                            alert("Something went wrong. Please try again.");
+                        }
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    alert(result.message);
+                    form.reset();
+                    window.location.href = "/";
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please check the console for more details.");
+                }
+
+            })
+        });
+    </script>
 @endsection

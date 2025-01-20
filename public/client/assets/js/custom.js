@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let quantity = parseInt(quantityDisplay.textContent);
 
         decreaseBtn.addEventListener('click', function () {
-            if (quantity > 0) {
+            if (quantity > 1) {
                 quantity--;
                 updateQuantity();
             }

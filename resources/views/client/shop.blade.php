@@ -13,41 +13,46 @@
                             @foreach ($products as $pro)
                                 <div class="col">
                                     <div class="product__item product__item--style2">
-                                        <div class="product__item-inner">
-                                            <div class="product__item-badge">
-                                                @if ($pro->sale_price > 0)
-                                                    {{ round((($pro->price - $pro->sale_price) / $pro->price) * 100) }}
-                                                @endif
-                                            </div>
-                                            <div class="product__item-thumb">
-                                                <img src="{{ $pro->image }}"
-                                                    alt="Popular Product Images">
-                                            </div>
-                                            <div class="product__item-content">
-                                                <h5><a href="
-                                                    {{ route('product-detail', ['category'
-                                                     => $pro->category->name, 'slug' => $pro->slug]) }}">
-                                                    {{ $pro->name }}
-                                                    </a></h5>
-                                                <div class="product__item-rating">
-                                                    <i class="fa-solid fa-star"></i> 5.0 <span>(35 Reviews)</span>
+                                        <form action="" method="post">
+                                            @csrf
+                                            <div class="product__item-inner">
+                                                <div class="product__item-badge">
+                                                    @if ($pro->sale_price > 0)
+                                                        -
+                                                        {{ round((($pro->price - $pro->sale_price) / $pro->price) * 100) }}
+                                                        %
+                                                    @endif
                                                 </div>
-                                                <div class="product__item-footer">
-                                                    <div class="product__item-price">
-                                                        @if ($pro->sale_price > 0)
-                                                        <h4>${{ number_format($pro->price, 2) }}/</h4>
-                                                        @else
-                                                        <h4>${{ number_format($pro->sale_price, 2) }}/</h4>
-                                                        <span><del>${{ number_format($pro->price, 2) }}</del></span>
-                                                        @endif
+                                                <div class="product__item-thumb">
+                                                    <img src="{{ $pro->image }}" alt="Popular Product Images">
+                                                </div>
+                                                <div class="product__item-content">
+                                                    <h5><a
+                                                            href="
+                                                    {{ route('product-detail', ['category' => $pro->category->name, 'slug' => $pro->slug]) }}">
+                                                            {{ $pro->name }}
+                                                        </a></h5>
+                                                    <div class="product__item-rating">
+                                                        <i class="fa-solid fa-star"></i> 5.0 <span>(35 Reviews)</span>
+                                                    </div>
+                                                    <div class="product__item-footer">
+                                                        <div class="product__item-price">
+                                                            @if (empty($pro->sale_price))
+                                                                <h4>${{ number_format($pro->price, 2) }}</h4>
+                                                            @else
+                                                                <h4>${{ number_format($pro->sale_price, 2) }}/</h4>
+                                                                <span><del>${{ number_format($pro->price, 2) }}</del></span>
+                                                            @endif
 
-                                                    </div>
-                                                    <div class="product__item-action">
-                                                        <a class="trk-btn trk-btn--outline" href="cart.html">Add to cart</a>
+                                                        </div>
+                                                        <div class="product__item-action">
+                                                            <a class="trk-btn trk-btn--outline addtocart_btn"
+                                                                data-product-id="{{ $pro->id }}">Add to cart</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach
@@ -78,79 +83,24 @@
                                         </div>
                                     </div>
                                     <ul class="sidebar-filter__list list-unstyled">
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" checked
-                                                        id="fruits-check">
-                                                    <label class="form-check-label d-block"
-                                                        for="fruits-check">Fruits</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(34)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="fish-check">
-                                                    <label class="form-check-label d-block" for="fish-check">Fish</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(24)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="vegetables-check">
-                                                    <label class="form-check-label d-block"
-                                                        for="vegetables-check">Vegetables</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(80)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="meats-check">
-                                                    <label class="form-check-label d-block" for="meats-check">Meats</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(05)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="oil-check">
-                                                    <label class="form-check-label d-block" for="oil-check">Oil</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(12)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="milk-check">
-                                                    <label class="form-check-label d-block" for="milk-check">Milk</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(12)</span>
-                                            </div>
-                                        </li>
-
-                                        <li class="sidebar-filter__item">
-                                            <div class="form-check">
-                                                <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" id="frozen-check">
-                                                    <label class="form-check-label d-block"
-                                                        for="frozen-check">Frozen</label>
-                                                </div>
-                                                <span class="sidebar-filter__count">(64)</span>
-                                            </div>
-                                        </li>
+                                        @foreach ($brand as $key => $bra)
+                                            <form action="" method="get">
+                                                @csrf
+                                                <li class="sidebar-filter__item">
+                                                    <div class="form-check">
+                                                        <div class="check-group flex-grow-1">
+                                                            <input class="form-check-input fruits-check" type="checkbox"
+                                                                id="fruits-check-{{ $key + 1 }}"
+                                                                data-slug={{ $bra->slug }}>
+                                                            <label class="form-check-label d-block"
+                                                                for="fruits-check-{{ $key + 1 }}">{{ $bra->name }}</label>
+                                                        </div>
+                                                        <span
+                                                            class="sidebar-filter__count">({{ $bra->products_count }})</span>
+                                                    </div>
+                                                </li>
+                                            </form>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -168,8 +118,7 @@
                                         <li class="sidebar-filter__item">
                                             <div class="form-check">
                                                 <div class="check-group flex-grow-1">
-                                                    <input class="form-check-input" type="checkbox" checked
-                                                        id="red-check">
+                                                    <input class="form-check-input" type="checkbox" checked id="red-check">
                                                     <label class="form-check-label d-block" for="red-check">Red</label>
                                                 </div>
                                             </div>
@@ -179,8 +128,7 @@
                                             <div class="form-check">
                                                 <div class="check-group flex-grow-1">
                                                     <input class="form-check-input" type="checkbox" id="green-check">
-                                                    <label class="form-check-label d-block"
-                                                        for="green-check">Green</label>
+                                                    <label class="form-check-label d-block" for="green-check">Green</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -345,4 +293,76 @@
         </div>
     </div>
     <!-- ===============>> Feature bar section end here <<================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addtocart_btn = document.querySelectorAll('.addtocart_btn');
+            addtocart_btn.forEach(btn => {
+                btn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+
+                    const form = btn.closest('form')
+                    if (form) {
+                        // form.submit();
+                        const product_id = btn.getAttribute('data-product-id');
+                        const formData = new FormData(form);
+                        formData.append('product_id', product_id);
+
+                        try {
+                            const response = await fetch('/add-to-cart', {
+                                method: 'POST',
+                                headers: {
+                                    "X-CSRF-TOKEN": document.querySelector(
+                                            'input[name="_token"]')
+                                        .value
+                                },
+                                body: formData
+                            });
+
+                            const data = await response.json(); // Xử lý phản hồi từ server
+                            if (response.ok) {
+                                alert(data.message);
+                                // Thực hiện hành động khi thêm thành công (ví dụ, cập nhật giỏ hàng, thông báo)
+                            } else {
+                                console.error("Error adding product to cart:", data);
+                            }
+                        } catch (error) {
+                            console.error("Fetch error:", error);
+                        }
+                    }
+
+                })
+            });
+
+
+
+            const category_btn = document.querySelectorAll('.fruits-check');
+            // console.log(category_btn);
+            category_btn.forEach(btn => {
+                btn.addEventListener('click', async function(e) {
+                    const slug = btn.getAttribute('data-slug');
+                    console.log(slug);
+                            try {
+                                const response = await fetch(
+                                `/shop/${slug}`, { // Sử dụng query string thay vì body
+                                    method: 'GET',
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                });
+
+                                const data = await response.json(); // Xử lý phản hồi từ server
+                                if (response.ok) {
+                                    console.log(data);
+                                    // Cập nhật giao diện với dữ liệu sản phẩm
+                                } else {
+                                    console.error("Error fetching products:", data);
+                                }
+                            } catch (error) {
+                                console.error("Fetch error:", error);
+                            }
+                });
+            });
+
+        })
+    </script>
 @endsection
